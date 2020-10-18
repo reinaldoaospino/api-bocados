@@ -1,36 +1,36 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AutoMapper;
+using Domain.Entities;
+using api_bocados.Models;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Domain.Interfaces.Application;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api_bocados.Controllers
 {
     [Route("api/authentication")]
     [ApiController]
-    public class AuthController
+    public class AuthController : Controller
     {
+        private readonly ITokenManager _tokenManager;
+        private readonly IMapper _mapper;
 
-        //[AllowAnonymous]
-        //[HttpPost]
-        //[Route("token")]
-        //public async Task<IActionResult> GetToken(TokenRequestModel request)
-        //{
-        //    var tokenDto = _mapper.Map<TokenRequest>(request);
-        //    var token = await _tokenManager.GetToken(tokenDto);
-        //    var tokenReponse = _mapper.Map<TokenResponseModel>(token);
+        public AuthController(ITokenManager tokenManager, IMapper mapper)
+        {
+            _tokenManager = tokenManager;
+            _mapper = mapper;
+        }
 
-        //    return Ok(tokenReponse);
-        //}
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("token")]
+        public async Task<IActionResult> GetToken(TokenRequestModel request)
+        {
+            var tokenDto = _mapper.Map<TokenRequest>(request);
+            var token = await _tokenManager.GetToken(tokenDto);
+            var tokenReponse = _mapper.Map<TokenResponseModel>(token);
 
-
-        //[HttpPost]
-        //public async Task<IActionResult> CreateAuth(AuthUserModel authUserModel)
-        //{
-        //    var authUserDto = _mapper.Map<AuthUser>(authUserModel);
-        //    await _tokenManager.Create(authUserDto);
-        //    return Ok();
-        //}
+            return Ok(tokenReponse);
+        }
     }
 }
