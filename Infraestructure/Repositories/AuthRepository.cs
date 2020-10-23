@@ -21,23 +21,23 @@ namespace Infraestructure.Repositories
         {
             _mongoService = mongoService;
             _mapper = mapper;
-            _collectionName = configuration["AppSettings:userCollection"];
+            _collectionName = configuration["AppSettings:authUserCollection"];
         }
 
         public async Task<IEnumerable<AuthUser>> GetAuthUser()
         {
-            var userEntity = await _mongoService.Get<AuthUserEntity>(_collectionName);
+            var authUserEntity = await _mongoService.Get<AuthUserEntity>(_collectionName);
 
-            var user = _mapper.Map<IEnumerable<AuthUser>>(userEntity);
+            var autUser = _mapper.Map<IEnumerable<AuthUser>>(authUserEntity);
 
-            return user;
+            return autUser;
         }
 
         public async Task Create(AuthUser authUser)
         {
-            var userEntity = _mapper.Map<AuthUserEntity>(authUser);
+            var authUserEntity = _mapper.Map<AuthUserEntity>(authUser);
 
-            await _mongoService.Create(_collectionName, userEntity);
+            await _mongoService.Create(_collectionName, authUserEntity);
         }
     }
 }

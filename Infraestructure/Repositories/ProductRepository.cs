@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Infraestructure.Entities;
 using Infraestructure.Interfaces;
 using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
 using Domain.Interfaces.Infraestructure;
+using Microsoft.Extensions.Configuration;
 
 namespace Infraestructure.Repositories
 {

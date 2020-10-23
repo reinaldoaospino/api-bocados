@@ -11,6 +11,7 @@ using Infraestructure.Interfaces;
 using Infraestructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Application.Services;
 
 namespace infraestructure.ioc
 {
@@ -27,14 +28,18 @@ namespace infraestructure.ioc
         {
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<ITokenManager, TokenManager>();
-            services.AddScoped<IProductManager, ProductManager>();         
+            services.AddScoped<IProductManager, ProductManager>();
+            services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IGeneratorIdService, GeneratorIdService>();
         }
 
         public static void ConfigureInfraestructureModule(IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration["AppSettings:connectionString"];
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();         
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            
             //services.AddScoped<IMongoService>(provider => new MongoService("Bocados", new MongoClient(connectionString))); TODO, usar cuando este el cluster de la base de Mongo
             services.AddScoped<IMongoService>(provider => new MongoService("Bocados", new MongoClient()));
         }
