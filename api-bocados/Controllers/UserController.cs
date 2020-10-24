@@ -30,8 +30,19 @@ namespace api_bocados.Controllers
             return Ok(userModel);
         }
 
+
         [HttpPost]
-        public async Task<ActionResult> Create (UserModel userModel)
+        [Route("authenticate")]
+        public async Task<ActionResult<UserModelResponse>> Authenticate(UserModel userModel)
+        {
+            var user = _mapper.Map<User>(userModel);
+            var response = await _manager.Authenticate(user);
+            var responseDto = _mapper.Map<UserModelResponse>(response);
+            return Ok(responseDto);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(UserModel userModel)
         {
             var user = _mapper.Map<User>(userModel);
             await _manager.Create(user);

@@ -5,6 +5,7 @@ using Infraestructure.Entities;
 using Infraestructure.Interfaces;
 using Domain.Interfaces.Infraestructure;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 
 namespace Infraestructure.Repositories
 {
@@ -21,6 +22,15 @@ namespace Infraestructure.Repositories
             _mongoService = mongoService;
             _mapper = mapper;
             _collectionName = configuration["AppSettings:userCollection"];
+        }
+
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            var userEntity = await _mongoService.Get<UserEntity>(_collectionName);
+
+            var user = _mapper.Map<IEnumerable<User>>(userEntity);
+
+            return user;
         }
 
         public async Task<User> Get(string id)

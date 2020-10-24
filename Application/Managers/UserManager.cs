@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Domain.Interfaces.Application;
 using Domain.Interfaces.Infraestructure;
+using System.Linq;
 
 namespace Application.Managers
 {
@@ -16,6 +17,20 @@ namespace Application.Managers
             _generatorId = generatorId;
         }
 
+        public async Task<UserResponse> Authenticate(User user)
+        {
+            var users = await _repository.GetUsers();
+
+            var exist = users.ToList().Find(u => u.UserName == user.UserName && u.Password == user.Password);
+
+            var isCorrect = exist != null;
+
+            return new UserResponse
+            {
+                IsCorrect = isCorrect
+            };
+        }
+
         public Task<User> Get(string id)
         {
             return _repository.Get(id);
@@ -27,5 +42,7 @@ namespace Application.Managers
 
             return _repository.Create(user);
         }
+
+
     }
 }
