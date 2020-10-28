@@ -11,7 +11,7 @@ namespace Application.Managers
     {
         private readonly ICategoryRepository _repository;
 
-        public ProductManager(ICategoryRepository repository)
+        public CategoryManager(ICategoryRepository repository)
         {
             _repository = repository;
         }
