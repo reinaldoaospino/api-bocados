@@ -51,14 +51,14 @@ namespace Infraestructure.Repositories
 
         public Task Update(Category category)
         {
-            var categoryEntity = _mapper.Map<CategoryEntity>(product);
+            var categoryEntity = _mapper.Map<CategoryEntity>(category);
 
-            return _mogoService.Update(_collectionName, productEntity.Id, categoryEntity);
+            return _mongoService.Update(_collectionName, categoryEntity.Id, categoryEntity);
         }
 
         public Task Delete(string id)
         {
-            return _mogoService.Delete<CategoryEntity>(_collectionName, id);
+            return _mongoService.Delete<CategoryEntity>(_collectionName, id);
         }
     }
 }
