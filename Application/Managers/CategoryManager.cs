@@ -10,10 +10,12 @@ namespace Application.Managers
     public class CategoryManager : ICategoryManager
     {
         private readonly ICategoryRepository _repository;
+        private readonly IGeneratorIdService _generatorId;
 
-        public CategoryManager(ICategoryRepository repository)
+        public CategoryManager(ICategoryRepository repository, IGeneratorIdService generatorId)
         {
             _repository = repository;
+            _generatorId = generatorId;
         }
 
         public Task<IEnumerable<Category>> Get()
@@ -28,9 +30,9 @@ namespace Application.Managers
 
         public Task Create(Category category)
         {
-            // product.Id = product.GenerateGuid(); //TODO conectar con el servicio que genera el id
+            category.Id = _generatorId.GenerateId();
 
-           return _repository.Create(category);
+            return _repository.Create(category);
         }
 
         public async Task Update(Category category)
