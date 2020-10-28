@@ -7,6 +7,6 @@ namespace Infraestructure.Entities
         [BsonId]
         public string Id { get; set; }
 
-        public string Category { get; set; }
+        public string CategoryName { get; set; }
     }
 }
