@@ -10,9 +10,9 @@ namespace Domain.Interfaces.Application
 
         Task<Category> Get(string id);
 
-        Task Create(Category product);
+        Task Create(Category category);
 
-        Task Update(Category product);
+        Task Update(Category category);
 
         Task Delete(string id);
     }
