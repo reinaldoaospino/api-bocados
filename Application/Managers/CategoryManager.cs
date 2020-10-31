@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Domain.Interfaces.Application;
 using Domain.Interfaces.Infraestructure;
+using System.Linq;
+using Domain.Exceptions;
 
 namespace Application.Managers
 {
@@ -28,11 +30,20 @@ namespace Application.Managers
             return _repository.Get(id);
         }
 
-        public Task Create(Category category)
+        public async Task Create(Category category)
         {
+            category.CategoryName = category.CategoryName.ToLower();
+
+            var categories = await _repository.Get();
+
+            var existName = categories.ToList().Find(c => c.CategoryName == category.CategoryName);
+
+            if (existName != null)
+                throw new ExistingCategoryException();
+
             category.Id = _generatorId.GenerateId();
 
-            return _repository.Create(category);
+            await _repository.Create(category);
         }
 
         public async Task Update(Category category)
@@ -44,7 +55,7 @@ namespace Application.Managers
             if (notExist)
                 throw new Exception();
 
-            // existingProduct.Update(category); //Todo crear el update
+            existingCategory.Update(category);
 
             await _repository.Update(existingCategory);
         }
