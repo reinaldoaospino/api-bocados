@@ -14,6 +14,8 @@ namespace Domain.Entities
 
         public string Category { get; set; }
 
+        public string Description { get; set; }
+
         public byte[] Imagen { get; set; }
 
         public string GenerateGuid()
@@ -27,6 +29,7 @@ namespace Domain.Entities
             Price = product.Price ?? Price;
             FeaturedProduct = product.FeaturedProduct ?? FeaturedProduct;
             Category = product.Category ?? Category;
+            Description = product.Description ?? Description;
             Imagen = product.Imagen.Length != 0 ? product.Imagen : Imagen;
         }
     }
