@@ -31,6 +31,7 @@ namespace infraestructure.ioc
             services.AddScoped<IProductManager, ProductManager>();
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IGeneratorIdService, GeneratorIdService>();
+            services.AddScoped<ICategoryManager, CategoryManager>();
         }
 
         public static void ConfigureInfraestructureModule(IServiceCollection services, IConfiguration configuration)
@@ -39,6 +40,7 @@ namespace infraestructure.ioc
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();           
             
             //services.AddScoped<IMongoService>(provider => new MongoService("Bocados", new MongoClient(connectionString))); TODO, usar cuando este el cluster de la base de Mongo
             services.AddScoped<IMongoService>(provider => new MongoService("Bocados", new MongoClient()));
