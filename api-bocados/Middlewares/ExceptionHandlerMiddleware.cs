@@ -27,6 +27,10 @@ namespace api_bocados.Middlewares
             {
                 await HandleException(context.Response, ex, HttpStatusCode.BadRequest, 2);
             }
+            catch(MaxFeatureProductException ex)
+            {
+                await HandleException(context.Response, ex, HttpStatusCode.BadRequest, 2);
+            }
             catch (ApplicationException ex)
             {
 

@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Domain.Interfaces.Application;
 using Domain.Interfaces.Infraestructure;
+using System.Linq;
+using Domain.Exceptions;
 
 namespace Application.Managers
 {
@@ -26,11 +28,18 @@ namespace Application.Managers
             return _repository.Get(id);
         }
 
-        public Task Create(Product product)
+        public async Task Create(Product product)
         {
+            var products = await _repository.Get();
+
+            var featuredProductCount = products.Where(p => bool.Parse(p.FeaturedProduct) == bool.Parse(product.FeaturedProduct)).Count();
+
+            if (featuredProductCount >= 6)
+                throw new MaxFeatureProductException();
+
             product.Id = product.GenerateGuid();
 
-           return _repository.Create(product);
+            await _repository.Create(product);
         }
 
         public async Task Update(Product product)
