@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Text;
 using Application;
 using MongoDB.Driver;
 using Infraestructure;
 using Application.Managers;
+using Application.Services;
+using Infraestructure.Interfaces;
+using Infraestructure.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using Domain.Interfaces.Application;
 using Domain.Interfaces.Infraestructure;
-using Infraestructure.Interfaces;
-using Infraestructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Application.Services;
 
 namespace infraestructure.ioc
 {
@@ -32,7 +32,8 @@ namespace infraestructure.ioc
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IGeneratorIdService, GeneratorIdService>();
             services.AddScoped<ICategoryManager, CategoryManager>();
-            services.AddScoped<IEmailManager, EmailManager>();  
+            services.AddScoped<IEmailManager, EmailManager>();
+            services.AddScoped<ISubscriptionManager, SubscriptionManager>();
         }
 
         public static void ConfigureInfraestructureModule(IServiceCollection services, IConfiguration configuration)
@@ -41,8 +42,9 @@ namespace infraestructure.ioc
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();           
-            
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+
             //services.AddScoped<IMongoService>(provider => new MongoService("Bocados", new MongoClient(connectionString))); TODO, usar cuando este el cluster de la base de Mongo
             services.AddScoped<IMongoService>(provider => new MongoService("Bocados", new MongoClient()));
         }
