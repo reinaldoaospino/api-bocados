@@ -17,6 +17,8 @@ namespace api_bocados.Mappers
             CreateMap<CategoryEntity, Category>().ReverseMap();
             CreateMap<EmailRequestModel, Email>().ReverseMap();
             CreateMap<AuthUserEntity, AuthUser>().ReverseMap();
+            CreateMap<SubscriptionModel, Subscription>().ReverseMap();
+            CreateMap<Subscription, SubscriptionEntity>().ReverseMap();
             CreateMap<UserModelResponse, UserResponse>().ReverseMap();
             CreateMap<TokenRequestModel, TokenRequest>().ReverseMap();
             CreateMap<TokenResponseModel, TokenResponse>().ReverseMap();
