@@ -32,6 +32,7 @@ namespace infraestructure.ioc
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IGeneratorIdService, GeneratorIdService>();
             services.AddScoped<ICategoryManager, CategoryManager>();
+            services.AddScoped<IEmailManager, EmailManager>();  
         }
 
         public static void ConfigureInfraestructureModule(IServiceCollection services, IConfiguration configuration)
