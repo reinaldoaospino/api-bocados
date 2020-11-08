@@ -24,10 +24,10 @@ namespace api_bocados.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("send")]
-        public async Task<IActionResult> GetToken(EmailRequestModel request)
+        public IActionResult GetToken(EmailRequestModel request)
         {
             var email = _mapper.Map<Email>(request);
-            await _emailManager.SendEmail(email);
+            _emailManager.SendEmail(email);
 
             return Ok();
         }
