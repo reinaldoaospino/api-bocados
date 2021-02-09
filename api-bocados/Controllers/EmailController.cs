@@ -1,7 +1,6 @@
 using AutoMapper;
 using Domain.Entities;
 using api_bocados.Models;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Domain.Interfaces.Application;
 using Microsoft.AspNetCore.Authorization;
@@ -10,6 +9,7 @@ namespace api_bocados.Controllers
 {
     [Route("api/email")]
     [ApiController]
+    [Authorize]
     public class EmailController : Controller
     {
         private readonly IEmailManager _emailManager;

@@ -4,11 +4,13 @@ using api_bocados.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Domain.Interfaces.Application;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api_bocados.Controllers
 {
     [Route("api/subscription")]
     [ApiController]
+    [Authorize]
     public class SubscriptionController : Controller
     {
         private readonly ISubscriptionManager _manager;

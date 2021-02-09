@@ -45,8 +45,7 @@ namespace infraestructure.ioc
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 
-            //services.AddScoped<IMongoService>(provider => new MongoService("Bocados", new MongoClient(connectionString))); TODO, usar cuando este el cluster de la base de Mongo
-            services.AddScoped<IMongoService>(provider => new MongoService("Bocados", new MongoClient()));
+            services.AddScoped<IMongoService>(provider => new MongoService("Bocados", new MongoClient(connectionString)));         
         }
 
         private static void ConfigureJwtToken(IServiceCollection services, IConfiguration configuration)
