@@ -13,7 +13,7 @@ namespace Application.Managers
         private readonly string _bocadosEmail;
         public EmailManager(IConfiguration configuration)
         {
-            _bocadosEmail = configuration["AppSettings:bocadosEmail"];
+            _bocadosEmail = configuration["AppSettings:bocadosEmail"];            
         }
         public void SendEmail(Email email)
         {
@@ -40,7 +40,7 @@ namespace Application.Managers
             client.AuthenticationMechanisms.Remove("XOAUTH2");
 
             // Note: only needed if the SMTP server requires authentication
-            client.Authenticate("gestor.correos.bocados@gmail.com", "Chawla-22");
+            client.Authenticate("gestor.correos.bocados@gmail.com", "bocados.nj");
 
             client.Send(message);
             client.Disconnect(true);
