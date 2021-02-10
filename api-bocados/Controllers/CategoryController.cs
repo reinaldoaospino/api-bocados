@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Domain.Interfaces.Application;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api_bocados.Controllers
 {
     [Route("api/category")]
     [ApiController]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryManager _manager;
