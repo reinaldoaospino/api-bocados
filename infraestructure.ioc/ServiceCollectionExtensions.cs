@@ -27,25 +27,27 @@ namespace infraestructure.ioc
         private static void ConfigureApplicationModule(IServiceCollection services)
         {
             services.AddScoped<IJwtService, JwtService>();
-            services.AddScoped<ITokenManager, TokenManager>();
-            services.AddScoped<IProductManager, ProductManager>();
             services.AddScoped<IUserManager, UserManager>();
-            services.AddScoped<IGeneratorIdService, GeneratorIdService>();
-            services.AddScoped<ICategoryManager, CategoryManager>();
+            services.AddScoped<ITokenManager, TokenManager>();
             services.AddScoped<IEmailManager, EmailManager>();
+            services.AddScoped<IStripeManager, StripeManager>();
+            services.AddScoped<IProductManager, ProductManager>();
+            services.AddScoped<ICategoryManager, CategoryManager>();
+            services.AddScoped<IGeneratorIdService, GeneratorIdService>();
             services.AddScoped<ISubscriptionManager, SubscriptionManager>();
         }
 
         public static void ConfigureInfraestructureModule(IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration["AppSettings:connectionString"];
+
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 
-            services.AddScoped<IMongoService>(provider => new MongoService("Bocados", new MongoClient(connectionString)));         
+            services.AddScoped<IMongoService>(provider => new MongoService("Bocados", new MongoClient(connectionString)));
         }
 
         private static void ConfigureJwtToken(IServiceCollection services, IConfiguration configuration)

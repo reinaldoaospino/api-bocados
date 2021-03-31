@@ -12,6 +12,7 @@ namespace api_bocados.Mappers
             CreateMap<UserModel, User>().ReverseMap();
             CreateMap<UserEntity, User>().ReverseMap();
             CreateMap<ProductModel, Product>().ReverseMap();
+            CreateMap<PaymentModel, Payment>().ReverseMap();
             CreateMap<Product, ProductEntity>().ReverseMap();
             CreateMap<CategoryModel, Category>().ReverseMap();
             CreateMap<CategoryEntity, Category>().ReverseMap();
